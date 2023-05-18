@@ -19,8 +19,7 @@ export const Login = () => {
 
     }
 
-    // @ts-ignore
-    // @ts-ignore
+
     return (
         <>
             <Grid container justifyContent={'center'}>

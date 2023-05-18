@@ -3,6 +3,7 @@ import styled from './ForgotPassword.module.scss'
 import {FormControl, FormGroup, FormLabel, Grid, TextField} from "@mui/material";
 import {InputPassword} from "../../../components/InputPassword/InputPassword";
 import {Button} from "../../../components/Button/Button";
+import {CheckEmail} from "./CheckEmail/CheckEmail";
 
 
 export const ForgotPassword = () => {

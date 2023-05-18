@@ -3,6 +3,7 @@ import "./App.css";
 import {Login} from "./features/Auth/Login/Login";
 import {SignUp} from "./features/Auth/SignUp/SignUp";
 import {ForgotPassword} from "./features/Auth/ForgotPassword/ForgotPassword";
+import {CheckEmail} from "./features/Auth/ForgotPassword/CheckEmail/CheckEmail";
 
 
 function App() {
@@ -33,9 +34,11 @@ function App() {
                 {/*  </a>*/}
                 {/*</span>*/}
 
-                {/*<Login/>*/}
-                {/*<SignUp/>*/}
+                <Login/>
+                <SignUp/>
                 <ForgotPassword/>
+                <CheckEmail/>
+
             </header>
         </div>
     );
