@@ -1,0 +1,23 @@
+.button {
+  background: #21268F;
+  box-shadow: 0 4px 18px rgba(33, 38, 143, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #ECECF9;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  width: 266px;
+  height: 36px;
+  border: none;
+  cursor: pointer;
+  transition: 0.1s;
+
+   &:hover{
+     background-color: #2a2faf;
+     transition: 0.1s;
+   }
+}

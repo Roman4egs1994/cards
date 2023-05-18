@@ -1,0 +1,85 @@
+.loginForm {
+  //position: absolute;
+  width: 413px;
+  height: 600px;
+  left: 434px;
+  top: 60px;
+  background: #F9F9FE;
+  border-radius: 8px;
+
+  .headerLogin {
+    font-family: Poppins, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 39px;
+    color: #2D2E46;
+    margin-bottom: 50px;
+  }
+
+  .textSignIn {
+    font-family: Poppins, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    text-align: center;
+    color: #2D2E46;
+  }
+
+  .inputLogin {
+    width: 347px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+
+  .formLabelForgot{
+    text-align: right;
+    margin-bottom: 85px;
+    .forgotPassword {
+      font-family:  Poppins, sans-serif; ;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #2D2E46;
+      text-decoration: none;
+
+
+      &:hover{
+        color: black;
+      }
+    }
+  }
+
+  .buttonBlock{
+    font-size: 0;
+
+    .notHaveAcc{
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 24px;
+      text-align: center;
+      color: #2D2E46;
+      opacity: 0.5;
+      margin: 0 0 10px 0;
+    }
+
+    .linkSignUp{
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center;
+      color: #21268F;
+      margin: 0;
+      text-decoration: none;
+      &:hover{
+        color: #3039c4;
+      }
+    }
+  }
+
+}
