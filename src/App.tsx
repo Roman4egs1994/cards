@@ -4,6 +4,7 @@ import {Login} from "./features/Auth/Login/Login";
 import {SignUp} from "./features/Auth/SignUp/SignUp";
 import {ForgotPassword} from "./features/Auth/ForgotPassword/ForgotPassword";
 import {CheckEmail} from "./features/Auth/ForgotPassword/CheckEmail/CheckEmail";
+import {CreateNewPassword} from "./features/Auth/ForgotPassword/NewPass/CreateNewPassword";
 
 
 function App() {
@@ -34,10 +35,12 @@ function App() {
                 {/*  </a>*/}
                 {/*</span>*/}
 
-                <Login/>
-                <SignUp/>
-                <ForgotPassword/>
-                <CheckEmail/>
+                {/*<Login/>*/}
+                {/*<SignUp/>*/}
+                {/*<ForgotPassword/>*/}
+                {/*<CheckEmail/>*/}
+                {/*<CreateNewPassword/>*/}
+
 
             </header>
         </div>

@@ -1,10 +1,11 @@
 import React from 'react';
 import {FormControl, FormGroup, FormLabel, Grid, TextField} from "@mui/material";
-import styled from './checkEmail.module.scss'
+import styled from './CreateNewPasswoed.module.scss'
 import {Button} from "../../../../components/Button/Button";
+import {InputPassword} from "../../../../components/InputPassword/InputPassword";
 
 
-export const CheckEmail = () => {
+export const CreateNewPassword = () => {
 
     const onClickButtonLoginHandler = () => {
 
@@ -14,26 +15,22 @@ export const CheckEmail = () => {
         <>
             <Grid container justifyContent={'center'}>
                 <Grid item justifyContent={'center'}>
-                    <form className={styled.checkEmail}>
+                    <form className={styled.createNewPassword}>
                         <FormControl>
                             <FormLabel>
-                                <h2 className={styled.headerCheckEmailText}>Check Email</h2>
+                                <h2 className={styled.headerCheckPasswordText}>Create new password</h2>
+                                <InputPassword style={{marginBottom:"10px"}}/>
                             </FormLabel>
                             <FormGroup>
-                                <div className={styled.blockCircle}>
-                                    <div className={styled.iconCircle}></div>
-                                </div>
-                            </FormGroup>
-                            <FormGroup>
                                 <p className={styled.text}>
-                                    We've sent an Email with instructions to example@mail.com
+                                    Create new password and we will send you further instructions to email
                                 </p>
                             </FormGroup>
                             <div className={styled.buttonBlock}>
                                 <Button
-                                    title={'Login'}
+                                    title={'Create new password'}
                                     callBack={onClickButtonLoginHandler}
-                                    className={styled.btnBackToLogin}
+                                    className={styled.btnNewPass}
                                 />
                             </div>
                         </FormControl>

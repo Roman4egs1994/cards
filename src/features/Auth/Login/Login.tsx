@@ -1,9 +1,7 @@
 import React from 'react';
-import {FormControl, FormGroup, FormLabel, Grid, IconButton, Input, InputAdornment, InputLabel, TextField} from "@mui/material";
+import {FormControl, FormGroup, FormLabel, Grid, TextField} from "@mui/material";
 import styled from './Login.module.scss'
 import {Button} from "../../../components/Button/Button";
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {InputPassword} from "../../../components/InputPassword/InputPassword";
 
 export const Login = () => {
