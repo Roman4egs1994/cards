@@ -1,0 +1,105 @@
+.tabHeader {
+  display: flex;
+
+  .tabsOff{
+    display: flex;
+    width: 173px;
+    height: 60px;
+    background: #DCCCDB;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 15px;
+    opacity: 50%;
+
+    .cardIcons{
+      display: flex;
+      position: relative;
+
+      img {
+        width: 22px;
+      };
+
+      .iconPackListOne{
+        width: 16.9px;
+        height: 21.13px;
+        border: 1px solid #000000;
+        border-radius: 2px;
+        background: #DCCCDB;
+        transform: rotate(-15deg);
+        z-index: 1;
+      }
+      .iconPackListTwo{
+        position: absolute;
+        left: 13px;
+        width: 16.9px;
+        height: 21.13px;
+        border: 1px solid #000000;
+        border-radius: 2px;
+        background: #DCCCDB;
+        transform: rotate(15deg);
+      }
+    }
+    .textPackList{
+      font-family: 'SF UI Display';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+      text-align: center;
+      letter-spacing: 0.4px;
+      color: #2D2E46;;
+    }
+  }
+
+
+  .tabs{
+    display: flex;
+    width: 173px;
+    height: 60px;
+    background: #DCCCDB;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 15px;
+    border-bottom: 3px solid #21268F;;
+
+    .cardIcons{
+      display: flex;
+      position: relative;
+      img {
+        width: 22px;
+      };
+
+
+      .iconPackListOne{
+        width: 16.9px;
+        height: 21.13px;
+        border: 1px solid #000000;
+        border-radius: 2px;
+        background: #DCCCDB;
+        transform: rotate(-15deg);
+        z-index: 1;
+      }
+      .iconPackListTwo{
+        position: absolute;
+        left: 13px;
+        width: 16.9px;
+        height: 21.13px;
+        border: 1px solid #000000;
+        border-radius: 2px;
+        background: #DCCCDB;
+        transform: rotate(15deg);
+      }
+    }
+    .textPackList{
+      font-family: 'SF UI Display';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+      text-align: center;
+      letter-spacing: 0.4px;
+      color: #2D2E46;;
+    }
+  }
+
+}
