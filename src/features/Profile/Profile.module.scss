@@ -1,0 +1,109 @@
+.profileBlock {
+  width: 100%;
+  //display: flex;
+
+
+  .toBack {
+    width: auto;
+    height: 30px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    img {
+      transform: rotate(180deg);
+    }
+
+    p {
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+      color: #000000;
+    }
+  }
+
+  .flexProfile {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .cardProfile {
+      //display: flex;
+      //flex-direction: column;
+      //justify-content: space-between;
+      //align-items: center;
+      width: 413px;
+      height: 360px;
+      background: #FFFFFF;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+      padding: 25px 0;
+
+      .textHeader {
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 27px;
+        color: #000000;
+        margin-bottom: 28px;
+      }
+
+      .photoProfile {
+        img{
+          width: 96px;
+          height: 96px;
+          border-radius: 48px;
+          //margin-bottom: 5px;
+        }
+      }
+
+      .nameLogin{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .mail{
+         p{
+           font-family: 'Montserrat', sans-serif;
+           font-style: normal;
+           font-weight: 400;
+           font-size: 14px;
+           line-height: 24px;
+           display: flex;
+           justify-content: center;
+           color: #000000;
+           opacity: 0.5;
+           margin-bottom: 35px;
+         }
+      }
+
+      .btnLogOut{
+        width: 127px;
+        height: 36px;
+        background: #FCFCFC;
+        box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+        border-radius: 30px;
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        letter-spacing: 0.01em;
+        color: #000000;
+        opacity: 0.8;
+        &:hover{
+          background: #f1f1f1;
+        }
+      }
+    }
+  }
+}
+

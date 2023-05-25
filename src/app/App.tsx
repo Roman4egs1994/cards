@@ -9,6 +9,7 @@ import {CheckEmail} from "../features/Auth/ForgotPassword/CheckEmail/CheckEmail"
 import {CreateNewPassword} from "../features/Auth/ForgotPassword/NewPass/CreateNewPassword";
 import {Header} from "../features/Header/Header";
 import {Tabs} from "../features/Header/Tabs/Tabs";
+import {Main} from "../features/Main/Main";
 
 
 function App() {
@@ -39,15 +40,12 @@ function App() {
             {/*    /!*  </a>*!/*/}
             {/*    /!*</span>*!/*/}
 
-                {/*<Login/>*/}
-                {/*<SignUp/>*/}
-                {/*<ForgotPassword/>*/}
-                {/*<CheckEmail/>*/}
-                {/*<CreateNewPassword/>*/}
+
             {/*</header>*/}
 
 
             <Header/>
+            <Main/>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormControl, FormGroup, FormLabel, Grid, TextField} from "@mui/material";
+import {Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, TextField} from "@mui/material";
 import styled from './Login.module.scss'
 import {Button} from "../../../components/Button/Button";
 import {InputPassword} from "../../../components/InputPassword/InputPassword";
@@ -20,13 +20,13 @@ export const Login = () => {
 
     return (
         <>
-            <Grid container justifyContent={'center'}>
+            <Grid container justifyContent={'center'} className={styled.grid}>
                 <Grid item justifyContent={'center'}>
                     <form className={styled.loginForm}>
                         <FormControl>
                             <FormLabel>
-                                <h2 className={styled.headerLogin} style={{fontWeight: "900"}}>it-incubator</h2>
-                                <p className={styled.textSignIn} style={{fontWeight: "900"}}>Sign in</p>
+                                {/*<h2 className={styled.headerLogin} style={{fontWeight: "900"}}>it-incubator</h2>*/}
+                                <p className={styled.textSignIn}>Sign in</p>
                             </FormLabel>
                             <FormGroup>
                                 <TextField
@@ -37,15 +37,20 @@ export const Login = () => {
                                     margin="normal"
                                     // style={{marginBottom:"10px"}}
                                 />
-                                <InputPassword style={{marginBottom:"45px"}}/>
+                                <InputPassword style={{marginBottom: "10px"}}/>
+                                <FormControlLabel
+                                    label={'Remember me'}
+                                    className={styled.checkBox}
+                                    control={<Checkbox name={'rememberMe'}/>}
+                                />
                                 <FormLabel className={styled.formLabelForgot}>
                                     <a className={styled.forgotPassword} href="">Forgot Password</a>
                                 </FormLabel>
                                 <div className={styled.buttonBlock}>
                                     <Button
-                                        title={'Login'}
+                                        title={'Sign In'}
                                         callBack={onClickButtonLoginHandler}
-                                        style={{marginBottom: "20px"}}
+                                        style={{marginBottom: "20px", width: '347px'}}
                                     />
                                     <p className={styled.notHaveAcc}>Don't have an account?</p>
                                     <a className={styled.linkSignUp} href={'#'}>Sign Up</a>

@@ -12,13 +12,6 @@ import {InputPassword} from "../../../components/InputPassword/InputPassword";
 
 export const SignUp = () => {
 
-    const [showPassword, setShowPassword] = React.useState(false);
-
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
-
 
     const onClickButtonSignUpHandler = () => {
 
@@ -31,35 +24,27 @@ export const SignUp = () => {
                     <form className={styled.signUpForm}>
                         <FormControl>
                             <FormLabel>
-                                <h2 className={styled.headerSignUp} style={{fontWeight: "900"}}>it-incubator</h2>
-                                <p className={styled.textSignIn} style={{fontWeight: "900"}}>Sign up</p>
+                                <p className={styled.textSignUp}>Sign Up</p>
                             </FormLabel>
                             <FormGroup>
                                 <TextField
-                                    className={styled.inputLogin}
+                                    className={styled.inputSignup}
                                     type={"email"}
                                     label="Email"
                                     variant="standard"
-                                    margin="normal"
-
                                 />
-                                <InputPassword  style={{marginBottom: "5px"}}/>
+                                <InputPassword  style={{marginBottom: "10px"}}/>
                                 <InputPassword
                                     style={{marginBottom: "80px"}}
                                 />
                                 <div className={styled.buttonBlock}>
                                     <Button
-                                        className={styled.buttonCansel}
-                                        title={'Cansel'}
+                                        title={'Sign Up'}
                                         callBack={onClickButtonSignUpHandler}
-                                        style={{marginBottom: "20px"}}
-                                    />
-                                    <Button
-                                        title={'Register'}
-                                        callBack={onClickButtonSignUpHandler}
-                                        style={{marginBottom: "20px", witch: "187px"}}
                                         className={styled.buttonRegister}
                                     />
+                                    <p className={styled.alreadyAcc}>Already have account?</p>
+                                    <a className={styled.linkSignIn} href={'#'}>Sign In</a>
                                 </div>
                             </FormGroup>
                         </FormControl>

@@ -19,8 +19,7 @@ export const ForgotPassword = () => {
                     <form className={styled.forgotPassword}>
                         <FormControl>
                             <FormLabel>
-                                <h2 className={styled.headerforgotPassword} style={{fontWeight: "900"}}>it-incubator</h2>
-                                <p className={styled.textforgotPassword} style={{fontWeight: "900",marginBottom:"50px"}}>Forgot your password</p>
+                                <p className={styled.textForgotPassword}>Forgot your password?</p>
                             </FormLabel>
                             <FormGroup className={styled.flexGroup}>
                                 <TextField
@@ -34,16 +33,16 @@ export const ForgotPassword = () => {
                                     <p className={styled.forgotInstructionText}>
                                         Enter your email address and we will send you further instructions
                                     </p>
+
                                 </FormLabel>
-                                <div className={styled.buttonBlock}>
+                                <div className={styled.btnBlock}>
                                     <Button
                                         title={'Send Instructions'}
                                         callBack={onClickButtonSignUpHandler}
-                                        style={{marginBottom: "20px"}}
                                         className={styled.buttonInstruction}
                                     />
                                     <p className={styled.rememberPassword}>Did you remember your password?</p>
-                                    <a className={styled.linkTryLogginIn} href={'#'}>Try loggin in</a>
+                                    <a className={styled.linkTryLoggingIn} href={'#'}>Try logging in</a>
                                 </div>
                             </FormGroup>
                         </FormControl>

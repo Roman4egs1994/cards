@@ -1,35 +1,30 @@
 .signUpForm {
   //position: absolute;
   width: 413px;
-  height: 540px;
+  height: 528px;
   left: 434px;
   top: 60px;
-  background: #F9F9FE;
-  border-radius: 8px;
+  background: #FFFFFF;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
 
-  .headerSignUp {
-    font-family: Poppins, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 26px;
-    line-height: 39px;
-    color: #2D2E46;
-    margin-bottom: 50px;
-  }
 
-  .textSignIn {
-    font-family: Poppins, sans-serif;
+  .textSignUp {
+    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 600;
-    font-size: 22px;
-    line-height: 33px;
+    font-size: 26px;
+    line-height: 32px;
     text-align: center;
-    color: #2D2E46;
+    color: #000000;
+    margin-top: 50px;
+    margin-bottom: 20px;
   }
 
-  .inputLogin {
+  .inputSignup {
     width: 347px;
     height: 50px;
+    margin-bottom: 10px;
   }
 
   .inputPassword {
@@ -59,40 +54,34 @@
   }
 
   .buttonBlock {
-    display: flex;
-    justify-content: space-between;
 
-    .buttonCansel {
-      width: 124px;
-      height: 36px;
-      background: #b8b9e7;
-      border-radius: 30px;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      text-align: center;
-      letter-spacing: 0.01em;
-      color: #21268F;
-      opacity: 0.8;
-      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
-      &:hover {
-        background: #c8caef;;
-      }
-    }
     .buttonRegister {
-      width: 187px;
-      height: 36px;
+      width: 347px;
+      margin-bottom: 30px;
     }
-    .rememberAcc{
+    .alreadyAcc{
+      font-family: 'Montserrat', sans-serif;
       font-style: normal;
       font-weight: 600;
       font-size: 14px;
       line-height: 24px;
       text-align: center;
-      color: #2D2E46;
+      color: #000000;
       opacity: 0.5;
-      margin: 0 0 10px 0;
+      margin-bottom: 25px;
+    }
+    .linkSignIn{
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center;
+      text-decoration-line: underline;
+      color: #366EFF;
+      &:hover{
+        color: #1555ff
+      }
     }
   }
 

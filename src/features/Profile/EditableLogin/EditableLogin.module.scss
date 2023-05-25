@@ -1,0 +1,50 @@
+.blockInputLogin{
+  position: relative;
+  //display: flex;
+
+  .inputLogin{
+    width: 347px;
+  }
+
+  .btnSaveLogin{
+    position: absolute;
+
+    top: 21px;
+    left: 295px;
+    width: 52px;
+    height: 24px;
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    //line-height: 24px;
+    background: #366EFF;
+    border-radius: 2px;
+  }
+}
+
+
+.blockRefactoringLogin{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100px;
+  height: 48px;
+
+  p{
+    margin: 0 7px 0 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+  }
+
+  img{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+}

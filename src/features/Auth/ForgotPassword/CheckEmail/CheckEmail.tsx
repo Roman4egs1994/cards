@@ -31,7 +31,7 @@ export const CheckEmail = () => {
                             </FormGroup>
                             <div className={styled.buttonBlock}>
                                 <Button
-                                    title={'Login'}
+                                    title={'Back to login'}
                                     callBack={onClickButtonLoginHandler}
                                     className={styled.btnBackToLogin}
                                 />

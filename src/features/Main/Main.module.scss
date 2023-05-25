@@ -1,0 +1,17 @@
+.mainBlock{
+  height: 100vh;
+
+
+  .mainContainer{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    //text-align: center;
+    //margin: 0 auto;
+    padding: 130px 0  65px 0;
+  }
+
+  .flexProfile{
+    display: block;
+  }
+}
