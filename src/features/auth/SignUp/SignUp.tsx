@@ -3,12 +3,32 @@ import { FormControl, FormGroup, FormLabel, Grid, TextField } from "@mui/materia
 import styled from "./SignUp.module.scss";
 import { Button } from "../../../components/Button/Button";
 import { InputPassword } from "../../../components/InputPassword/InputPassword";
+import { useAppDispatch } from "app/hooks";
+import { authThunks } from "../auth.slice";
+import { RegisterDataParamsType } from "../auth.api";
 
 export const SignUp = () => {
-  const onClickButtonSignUpHandler = () => {};
+  const dispatch = useAppDispatch();
+
+  const onClickButtonSignUpHandler = () => {
+    const arg = {
+      email: "r.rybkin94@gmail.com",
+      password: "192837qqq!",
+    };
+    dispatch(authThunks.register(arg));
+  };
+
+  const onClickButtonSignUpHandlerNew = () => {
+    const arg = {
+      email: "r.rybkin94@gmail.com",
+      password: "1qazxcvBG",
+    };
+    dispatch(authThunks.register(arg));
+  };
 
   return (
     <>
+      <button onClick={onClickButtonSignUpHandlerNew}>asdad</button>
       <Grid container justifyContent={"center"}>
         <form className={styled.signUpForm}>
           <FormControl>

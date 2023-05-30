@@ -6,8 +6,8 @@ import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Login } from "./features/Auth/Login/Login";
-import { SignUp } from "./features/Auth/SignUp/SignUp";
+import { Login } from "./features/auth/Login/Login";
+import { SignUp } from "./features/auth/SignUp/SignUp";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
