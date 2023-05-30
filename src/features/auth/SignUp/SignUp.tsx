@@ -5,7 +5,7 @@ import { Button } from "../../../components/Button/Button";
 import { InputPassword } from "../../../components/InputPassword/InputPassword";
 import { useAppDispatch } from "app/hooks";
 import { authThunks } from "../auth.slice";
-import { RegisterDataParamsType } from "../auth.api";
+import { RegisterArgType } from "../auth.api";
 
 export const SignUp = () => {
   const dispatch = useAppDispatch();

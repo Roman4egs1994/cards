@@ -4,21 +4,29 @@ import styled from "./Login.module.scss";
 import { Button } from "../../../components/Button/Button";
 import { InputPassword } from "../../../components/InputPassword/InputPassword";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../app/hooks";
+import { authThunks } from "../auth.slice";
 export const Login = () => {
-  // const [showPassword, setShowPassword] = React.useState(false);
-  //
-  // const handleClickShowPassword = () => setShowPassword((show) => !show);
-  // const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //     event.preventDefault();
-  // };
-
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const onClickButtonLoginHandler = () => {
     // navigate("/register");
   };
 
+  const onClickButtonLoginHandlerNew = () => {
+    const arg = {
+      email: "r.rybkin94@gmail.com",
+      password: "1qazxcvBG",
+      rememberMe: true,
+    };
+
+    dispatch(authThunks.login(arg));
+  };
+
   return (
     <>
+      <button onClick={onClickButtonLoginHandlerNew}>login</button>
       <Grid container justifyContent={"center"} className={styled.grid}>
         <Grid item justifyContent={"center"}>
           <form className={styled.loginForm}>
