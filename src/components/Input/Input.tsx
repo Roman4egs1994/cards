@@ -1,34 +1,16 @@
 import * as React from "react";
 import s from "./Input.module.scss";
+import { ChangeEvent } from "react";
 
-export type InputPropsType = {
-  type?: string;
-  className?: string;
-  onChange?: () => void;
-  placeholder?: string;
-  label?: string;
-};
+type InputPropsType = React.InputHTMLAttributes<HTMLInputElement> & { label?: string };
 
-export const Input: React.FC<InputPropsType> = (props) => {
-  const { label, type, className, onChange, placeholder, ...otherProps } = props;
+export const Input: React.FC<InputPropsType> = ({ className, label, ...props }) => {
   const styleInput = s.inputStyle + " " + className;
-
-  const onChangeInputHandler = () => {
-    if (onChange) {
-      onChange();
-    }
-  };
 
   return (
     <>
       <label className={s.labelBox}>{label}</label>
-      <input
-        type={type}
-        className={styleInput}
-        onChange={onChangeInputHandler}
-        placeholder={placeholder}
-        {...otherProps}
-      />
+      <input className={styleInput} {...props} />
     </>
   );
 };

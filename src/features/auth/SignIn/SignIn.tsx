@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { AuthContainer } from "../AuthContainer/AuthContainer";
 import { Input } from "../../../components/Input/Input";
 import styles from "./styles.module.scss";
@@ -12,20 +12,32 @@ type FormDataType = {
 };
 
 export const SignIn = () => {
+  const [title, setTitle] = useState("");
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<FormDataType>();
 
+  const onSubmit = (data: any) => {
+    alert(JSON.stringify(data));
+  };
+
   const onClickBtnSignIn = () => {};
+
+  const onChangeFunction = (e: ChangeEvent<HTMLInputElement>) => {
+    const string = e.currentTarget.value;
+    setTitle(string);
+    console.log(title);
+  };
 
   return (
     <>
       <AuthContainer textTitle={"Sign In"}>
-        <form action="">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.inputEmail}>
-            <Input type={"email"} label={"Email"} />
+            <Input type={"email"} label={"Email"} onChange={onChangeFunction} value={title} />
           </div>
           <div className={styles.inputPasswordOne}>
             <Input type={"password"} label={"Password"} />
@@ -38,7 +50,7 @@ export const SignIn = () => {
             <a href="/forgot-password">Forgot Password</a>
           </div>
           <div className={styles.bottomBlock}>
-            <Button callBack={onClickBtnSignIn} title={"Sign in"} className={styles.btn} />
+            <Button type={"submit"} callBack={onClickBtnSignIn} title={"Sign in"} className={styles.btn} />
             <p>Don't have an account?</p>
             <a href="/register">Sign Up</a>
           </div>
