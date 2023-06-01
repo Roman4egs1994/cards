@@ -1,0 +1,49 @@
+
+.authContainer{
+  height: 456px;
+
+  .inputEmail{
+    margin-bottom: 25px;
+  }
+
+  .inputBottomText{
+    margin-bottom: 65px;
+    p{
+      font-family: 'Montserrat',sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+      color: #000000;
+      opacity: 0.5;
+    }
+
+  }
+  .bottomBlock{
+
+    .btn{
+      margin-bottom: 31px;
+    }
+    p{
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 24px;
+      text-align: center;
+      color: #000000;
+      opacity: 0.5;
+      margin-bottom: 11px;
+    }
+    a{
+      font-family: 'Montserrat',sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center;
+      text-decoration-line: underline;
+      color: #366EFF;
+    }
+  }
+}

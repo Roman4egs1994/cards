@@ -6,8 +6,11 @@ import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Login } from "./features/auth/Login/Login";
+import { SignIn } from "./features/auth/SignIn/SignIn";
 import { SignUp } from "./features/auth/SignUp/SignUp";
+import { ForgotPassword } from "./features/auth/ForgotPassword/ForgotPassword";
+import { CheckEmail } from "./features/auth/ForgotPassword/CheckEmail/CheckEmail";
+import { Profile } from "./features/Profile/Profile";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -20,7 +23,7 @@ export const router = createBrowserRouter([
     path: "/login",
     element: (
       <App>
-        <Login />
+        <SignIn />
       </App>
     ),
   },
@@ -33,8 +36,28 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/packs",
-    element: <h1>Login</h1>,
+    path: "/forgot-password",
+    element: (
+      <App>
+        <ForgotPassword />
+      </App>
+    ),
+  },
+  {
+    path: "/forgot-password/check-email",
+    element: (
+      <App>
+        <CheckEmail />
+      </App>
+    ),
+  },
+  {
+    path: "/profile",
+    element: (
+      <App>
+        <Profile />
+      </App>
+    ),
   },
 ]);
 root.render(

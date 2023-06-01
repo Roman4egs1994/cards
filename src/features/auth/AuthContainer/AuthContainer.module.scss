@@ -1,0 +1,24 @@
+.stylesAuthContainer{
+  max-width: 413px;
+  height: 552px;
+  background: #FFFFFF;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  padding: 35px 33px  42px 33px;
+  .container{
+    display: flex;
+    flex-direction: column;
+    .titleBlock{
+      margin-bottom: 41px;
+      .textTitle{
+        font-family: 'Montserrat',sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 32px;
+        color: #000000;
+      }
+    }
+
+  }
+}

@@ -1,10 +1,10 @@
 import React, { FC, ReactNode, useEffect } from "react";
 import styled from "./App.module.scss";
-import { Main } from "../features/Main/Main";
-import { Header } from "../features/Header/Header";
+import { Header } from "features/Header/Header";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { appActions } from "./app.slice";
-import styleStartContainer from "../common/styles/Container.module.scss";
+import styleStartContainer from "common/styles/Container.module.scss";
+import { SignIn } from "../features/auth/SignIn/SignIn";
 
 type AppTypeProps = {
   children?: ReactNode;

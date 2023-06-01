@@ -1,55 +1,35 @@
-import React from 'react';
-import styled from './ForgotPassword.module.scss'
-import {FormControl, FormGroup, FormLabel, Grid, TextField} from "@mui/material";
-import {InputPassword} from "../../../components/InputPassword/InputPassword";
-import {Button} from "../../../components/Button/Button";
-import {CheckEmail} from "./CheckEmail/CheckEmail";
-
+import React from "react";
+import { AuthContainer } from "../AuthContainer/AuthContainer";
+import { Input } from "../../../components/Input/Input";
+import styles from "./styles.module.scss";
+import { Button } from "../../../components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 export const ForgotPassword = () => {
+  const navigate = useNavigate();
+  const onClickBtnSendInstruction = () => {
+    navigate("/forgot-password/check-email");
+  };
 
-    const onClickButtonSignUpHandler = () => {
-
-    }
-
-    return (
-        <>
-            <Grid container justifyContent={'center'}>
-                <Grid item justifyContent={'center'}>
-                    <form className={styled.forgotPassword}>
-                        <FormControl>
-                            <FormLabel>
-                                <p className={styled.textForgotPassword}>Forgot your password?</p>
-                            </FormLabel>
-                            <FormGroup className={styled.flexGroup}>
-                                <TextField
-                                    className={styled.inputEmail}
-                                    type={"email"}
-                                    label="Email"
-                                    variant="standard"
-                                    margin="normal"
-                                />
-                                <FormLabel className={styled.formLabelForgot}>
-                                    <p className={styled.forgotInstructionText}>
-                                        Enter your email address and we will send you further instructions
-                                    </p>
-
-                                </FormLabel>
-                                <div className={styled.btnBlock}>
-                                    <Button
-                                        title={'Send Instructions'}
-                                        callBack={onClickButtonSignUpHandler}
-                                        className={styled.buttonInstruction}
-                                    />
-                                    <p className={styled.rememberPassword}>Did you remember your password?</p>
-                                    <a className={styled.linkTryLoggingIn} href={'#'}>Try logging in</a>
-                                </div>
-                            </FormGroup>
-                        </FormControl>
-                    </form>
-                </Grid>
-            </Grid>
-        </>
-    );
+  return (
+    <>
+      <AuthContainer
+        textTitle={"Forgot your password"}
+        classNameAuthContainer={styles.authContainer}
+        styleBottomTitleText={{ marginBottom: "41px" }}
+      >
+        <div className={styles.inputEmail}>
+          <Input type={"email"} label={"Email"} />
+        </div>
+        <div className={styles.inputBottomText}>
+          <p>Enter your email address and we will send you further instructions</p>
+        </div>
+        <div className={styles.bottomBlock}>
+          <Button callBack={onClickBtnSendInstruction} title={"Send Instruction"} className={styles.btn} />
+          <p>Did you remember your password?</p>
+          <a href="/login">Try logging in</a>
+        </div>
+      </AuthContainer>
+    </>
+  );
 };
-

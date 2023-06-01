@@ -1,46 +1,32 @@
-import React from 'react';
-import {FormControl, FormGroup, FormLabel, Grid, TextField} from "@mui/material";
-import styled from './checkEmail.module.scss'
-import {Button} from "../../../../components/Button/Button";
-
+import React from "react";
+import styles from "./styles.module.scss";
+import { Button } from "../../../../components/Button/Button";
+import { AuthContainer } from "../../AuthContainer/AuthContainer";
+import { useNavigate } from "react-router-dom";
 
 export const CheckEmail = () => {
+  const navigate = useNavigate();
+  const onClickBtnBackToLogin = () => {
+    navigate("/login");
+  };
 
-    const onClickButtonLoginHandler = () => {
-
-    }
-
-    return (
-        <>
-            <Grid container justifyContent={'center'}>
-                <Grid item justifyContent={'center'}>
-                    <form className={styled.checkEmail}>
-                        <FormControl>
-                            <FormLabel>
-                                <h2 className={styled.headerCheckEmailText}>Check Email</h2>
-                            </FormLabel>
-                            <FormGroup>
-                                <div className={styled.blockCircle}>
-                                    <div className={styled.iconCircle}></div>
-                                </div>
-                            </FormGroup>
-                            <FormGroup>
-                                <p className={styled.text}>
-                                    We've sent an Email with instructions to example@mail.com
-                                </p>
-                            </FormGroup>
-                            <div className={styled.buttonBlock}>
-                                <Button
-                                    title={'Back to login'}
-                                    callBack={onClickButtonLoginHandler}
-                                    className={styled.btnBackToLogin}
-                                />
-                            </div>
-                        </FormControl>
-                    </form>
-                </Grid>
-            </Grid>
-        </>
-    );
+  return (
+    <>
+      <AuthContainer
+        textTitle={"Check Email"}
+        classNameAuthContainer={styles.authContainer}
+        styleBottomTitleText={{ marginBottom: "29px" }}
+      >
+        <div className={styles.iconCheckEmail}>
+          <div className={styles.circle}></div>
+        </div>
+        <div className={styles.textBlock}>
+          <p>We've sent an Email with instruction to example@mail.com</p>
+        </div>
+        <div className={styles.bottomBlock}>
+          <Button callBack={onClickBtnBackToLogin} title={"Back to Login"} className={styles.btn} />
+        </div>
+      </AuthContainer>
+    </>
+  );
 };
-

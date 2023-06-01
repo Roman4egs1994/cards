@@ -1,0 +1,33 @@
+
+.authContainer {
+  height: 408px;
+
+  .iconCheckEmail{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 31px;
+    .circle{
+      height: 108px;
+      width: 108px;
+      border-radius: 59px;
+      background: rgba(54, 110, 255, 0.05);
+      border: 1px solid #366EFF
+    }
+  }
+
+  .textBlock{
+    margin-bottom: 41px;
+    p{
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+      text-align: center;
+      color: #000000;
+      opacity: 0.5;
+    }
+  }
+
+}
+
