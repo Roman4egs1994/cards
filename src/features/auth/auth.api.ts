@@ -11,7 +11,7 @@ export const authApi = {
 
 //Omit убери не нужное
 //Pick какие типы выбрать
-//Partial все типы будут не обязательными
+//Partial все типы будут не обяз
 
 export type RegisterArgType = Omit<LoginArgType, "rememberMe">;
 export type LoginArgType = {
