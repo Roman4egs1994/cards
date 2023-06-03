@@ -2,7 +2,7 @@ import React from "react";
 import styled from "./Button.module.scss";
 
 type ButtonPropsType = {
-  callBack: () => void;
+  callBack?: () => void;
   title: string;
   className?: string;
   style?: object;
@@ -15,7 +15,9 @@ export const Button: React.FC<ButtonPropsType> = (props) => {
   const styleButton = styled.button + " " + className;
 
   const onclickBtnHandler = () => {
-    callBack();
+    if (callBack) {
+      callBack();
+    }
   };
 
   return (

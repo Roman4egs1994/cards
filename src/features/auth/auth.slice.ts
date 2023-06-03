@@ -18,12 +18,12 @@ const slice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.profile = action.payload.profile;
       })
-      .addCase(register.fulfilled, (state, action) => {});
+      .addCase(registration.fulfilled, (state, action) => {});
   },
 });
 
 //THUNK
-const register = createAppAsyncThunk<void, RegisterArgType>("auth/register", async (arg) => {
+export const registration = createAppAsyncThunk<void, RegisterArgType>("auth/register", async (arg) => {
   const res = await authApi.register(arg);
   return console.log(res.data.addedUser);
 });
@@ -40,4 +40,4 @@ const login = createAppAsyncThunk<{ profile: ProfileUserType /*Что возвр
 
 export const authReducer = slice.reducer;
 export const authActions = slice.actions;
-export const authThunks = { register, login };
+export const authThunks = { register: registration, login };
