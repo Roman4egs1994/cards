@@ -7,6 +7,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "../../../components/Button/Button";
 import { useAppDispatch } from "../../../app/hooks";
+import { login, registration } from "../auth.slice";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup.string().required("Email is a required").email("Email should have correct format"),
@@ -19,13 +21,13 @@ const schema = yup.object().shape({
       /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/,
       "The password must contain at least one uppercase letter, one small letter, one number, and one special character"
     ),
-  check: yup.boolean(),
+  rememberMe: yup.boolean().oneOf([true, false], "Это поле обязательно"),
 });
 type FormDataType = yup.InferType<typeof schema>;
 
 export const SignIn = () => {
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -37,7 +39,11 @@ export const SignIn = () => {
   });
 
   const onSubmit = (data: FormDataType) => {
-    alert(JSON.stringify(data));
+    const preparedData = { ...data, rememberMe: !!data.rememberMe }; //Проверка на undefined
+    dispatch(login(preparedData))
+      .unwrap()
+      .then()
+      .catch((err) => console.warn(err));
     reset();
   };
 
@@ -54,7 +60,7 @@ export const SignIn = () => {
             {errors.password && <p>{errors.password.message}</p>}
           </div>
           <div className={styles.inputCheckBoxBlock}>
-            <Input id={"check"} type={"checkbox"} {...register("check")} className={styles.inputCheckBox} />
+            <Input id={"rememberMe"} type={"checkbox"} {...register("rememberMe")} className={styles.inputCheckBox} />
             <p className={styles.checkBoxText}>Remember me</p>
           </div>
           <div className={styles.forgotPasswordBlock}>

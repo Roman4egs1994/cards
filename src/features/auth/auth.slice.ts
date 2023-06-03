@@ -28,15 +28,16 @@ export const registration = createAppAsyncThunk<void, RegisterArgType>("auth/reg
   return console.log(res.data.addedUser);
 });
 
-const login = createAppAsyncThunk<{ profile: ProfileUserType /*Что возвращает**/ }, LoginArgType /*Что принимает**/>(
-  "auth/login",
-  async (arg, thunkAPI) => {
-    const { dispatch, getState } = thunkAPI;
+export const login = createAppAsyncThunk<
+  { profile: ProfileUserType /*Что возвращает**/ },
+  LoginArgType /*Что принимает**/
+>("auth/login", async (arg, thunkAPI) => {
+  const { dispatch, getState } = thunkAPI;
 
-    const res = await authApi.login(arg);
-    return { profile: res.data };
-  }
-);
+  const res = await authApi.login(arg);
+  console.log(res.data);
+  return { profile: res.data };
+});
 
 export const authReducer = slice.reducer;
 export const authActions = slice.actions;

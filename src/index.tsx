@@ -11,6 +11,7 @@ import { SignUp } from "./features/auth/SignUp/SignUp";
 import { ForgotPassword } from "./features/auth/ForgotPassword/ForgotPassword";
 import { CheckEmail } from "./features/auth/ForgotPassword/CheckEmail/CheckEmail";
 import { Profile } from "./features/Profile/Profile";
+import { Cards } from "./features/Cards/Cards";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -56,6 +57,14 @@ export const router = createBrowserRouter([
     element: (
       <App>
         <Profile />
+      </App>
+    ),
+  },
+  {
+    path: "/cards",
+    element: (
+      <App>
+        <Cards />
       </App>
     ),
   },
