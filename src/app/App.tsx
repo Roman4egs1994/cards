@@ -37,6 +37,7 @@ const App: FC<AppTypeProps> = ({ children }) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        className={""}
         theme="colored"
       />
       <main className={styled.mainBlock}>
