@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authApi, LoginArgType, ProfileUserType, RegisterArgType } from "./auth.api";
+import {
+  authApi,
+  LoginArgType,
+  ProfileUserType,
+  RegisterArgType,
+} from "./auth.api";
 import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk";
 import { isAxiosError } from "axios";
+import { thunkTryCatch } from "../../common/utils/thunk-try-catch";
 
 //REDUCER
 const slice = createSlice({
@@ -9,7 +15,6 @@ const slice = createSlice({
   initialState: {
     profile: null as ProfileUserType | null,
     isLoading: false,
-    error: null as null | string,
   },
   reducers: {
     // setProfile: (state, action: PayloadAction<{ profile: ProfileUserType }>) => {
@@ -17,37 +22,34 @@ const slice = createSlice({
     // },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(login.fulfilled, (state, action) => {
-        state.profile = action.payload.profile;
-      })
-      .addCase(registration.rejected, (state, action) => {
-        state.isLoading = true;
-        if (!isAxiosError(action.payload)) {
-          state.error = "an error has occurred";
-          return;
-        }
-        state.error = action.payload?.response?.data?.error;
-        state.isLoading = false;
-      });
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.profile = action.payload.profile;
+    });
   },
 });
 
 //THUNK
-export const registration = createAppAsyncThunk<any, RegisterArgType>("auth/register", async (arg, thunkAPI) => {
-  const { rejectWithValue } = thunkAPI;
-  try {
-    const res = await authApi.register(arg);
-    console.log(res.data.addedUser);
-  } catch (e) {
-    // if (!isAxiosError(e)) return "an error has occurred";
-    // console.error(e?.response?.data?.error);
+const registration = createAppAsyncThunk<any, RegisterArgType>(
+  "auth/register",
+  async (arg, thunkAPI) => {
+    // const { rejectWithValue } = thunkAPI;
+    // try {
+    //   const res = await authApi.register(arg);
+    //   console.log(res.data.addedUser);
+    // } catch (e) {
+    //   // if (!isAxiosError(e)) return "an error has occurred";
+    //   // console.error(e?.response?.data?.error);
+    //   return rejectWithValue(e);
+    // }
 
-    return rejectWithValue(e);
+    return thunkTryCatch(thunkAPI, async () => {
+      const res = await authApi.register(arg);
+      return res.data;
+    });
   }
-});
+);
 
-export const login = createAppAsyncThunk<
+const login = createAppAsyncThunk<
   { profile: ProfileUserType /*Что возвращает**/ },
   LoginArgType /*Что принимает**/
 >("auth/login", async (arg, thunkAPI) => {

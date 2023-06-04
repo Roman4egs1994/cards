@@ -4,10 +4,10 @@ import { Input } from "../../../components/Input/Input";
 import styles from "./styles.module.scss";
 import { Button } from "../../../components/Button/Button";
 import * as yup from "yup";
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { registration } from "../auth.slice";
+import { authThunks } from "../auth.slice";
 import { ModalWindow } from "../../../components/ModalWindow/ModalWindow";
 import { useNavigate } from "react-router-dom";
 
@@ -30,6 +30,9 @@ const schema = yup.object().shape({
 type FormDataType = yup.InferType<typeof schema>;
 
 export const SignUp = () => {
+  // const authError = useAppSelector((state) => state.auth.error);
+  // const isLoading = useAppSelector((state) => state.app.isLoading);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isAlertMessage, setIisAlertMessage] = useState(false); // локальный state для регистрации
@@ -50,7 +53,7 @@ export const SignUp = () => {
 
   const onSubmit = (data: FormDataType) => {
     // alert(JSON.stringify(data));
-    dispatch(registration(data))
+    dispatch(authThunks.register(data))
       .unwrap()
       .then(startFunction)
       .catch((err) => console.warn(err));
@@ -63,6 +66,8 @@ export const SignUp = () => {
 
   return (
     <>
+      {/*{isLoading && <p>isLoading</p>}*/}
+      {/*{!!authError && <p>{authError}</p>}*/}
       {isAlertMessage ? (
         <ModalWindow
           classNameFooterFlex={styles.footerFlex}

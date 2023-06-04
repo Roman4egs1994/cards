@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "../../../components/Button/Button";
 import { useAppDispatch } from "../../../app/hooks";
-import { login, registration } from "../auth.slice";
+import { authThunks } from "../auth.slice";
 import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
@@ -40,7 +40,7 @@ export const SignIn = () => {
 
   const onSubmit = (data: FormDataType) => {
     const preparedData = { ...data, rememberMe: !!data.rememberMe }; //Проверка на undefined
-    dispatch(login(preparedData))
+    dispatch(authThunks.login(preparedData))
       .unwrap()
       .then()
       .catch((err) => console.warn(err));
