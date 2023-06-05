@@ -6,8 +6,8 @@ import {
   RegisterArgType,
 } from "./auth.api";
 import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk";
-import { isAxiosError } from "axios";
 import { thunkTryCatch } from "../../common/utils/thunk-try-catch";
+import { appActions } from "../../app/app.slice";
 
 //REDUCER
 const slice = createSlice({
@@ -32,7 +32,7 @@ const slice = createSlice({
 const registration = createAppAsyncThunk<any, RegisterArgType>(
   "auth/register",
   async (arg, thunkAPI) => {
-    // const { rejectWithValue } = thunkAPI;
+    const { dispatch } = thunkAPI;
     // try {
     //   const res = await authApi.register(arg);
     //   console.log(res.data.addedUser);
@@ -41,10 +41,9 @@ const registration = createAppAsyncThunk<any, RegisterArgType>(
     //   // console.error(e?.response?.data?.error);
     //   return rejectWithValue(e);
     // }
-
     return thunkTryCatch(thunkAPI, async () => {
       const res = await authApi.register(arg);
-      return res.data;
+      return res.data.addedUser;
     });
   }
 );
@@ -55,9 +54,11 @@ const login = createAppAsyncThunk<
 >("auth/login", async (arg, thunkAPI) => {
   const { dispatch, getState } = thunkAPI;
 
-  const res = await authApi.login(arg);
-  console.log(res.data);
-  return { profile: res.data };
+  return thunkTryCatch(thunkAPI, async () => {
+    const res = await authApi.login(arg);
+    console.log(res.data);
+    return { profile: res.data };
+  });
 });
 
 export const authReducer = slice.reducer;

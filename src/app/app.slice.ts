@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { isAxiosError } from "axios";
+
 const appInitialState = {
   error: null as string | null,
   isLoading: false,
@@ -23,6 +25,55 @@ const slice = createSlice({
     ) => {
       state.isAppInitialized = action.payload.isAppInitialized;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      (action) => {
+        return action.type.endsWith("/pending");
+      },
+      (state) => {
+        state.isLoading = true;
+      }
+    );
+    builder.addMatcher(
+      (action) => {
+        return action.type.endsWith("/rejected");
+      },
+      (state, action) => {
+        state.isLoading = false;
+
+        //Показ ошибки на rejected 1
+        const { error, showGlobalError = true } = action.payload;
+
+        if (!showGlobalError) return;
+
+        let errorMessage = "";
+        if (isAxiosError(error)) {
+          if (
+            error?.response?.status === 400 &&
+            error?.request.responseURL.endsWith("/me")
+          )
+            return;
+          errorMessage = error?.response?.data?.error || error.message;
+          state.error = errorMessage;
+        } else if (error instanceof Error) {
+          errorMessage = `Native error: ${error.message}`;
+
+          state.error = errorMessage;
+        } else {
+          errorMessage = JSON.stringify(error);
+          state.error = errorMessage;
+        }
+      }
+    );
+    builder.addMatcher(
+      (action) => {
+        return action.type.endsWith("/fulfilled");
+      },
+      (state) => {
+        state.isLoading = false;
+      }
+    );
   },
   // extraReducers: (builder) => {
   //   builder.addCase(authThunks.register.rejected, (state, action) => {
