@@ -66,8 +66,6 @@ export const SignUp = () => {
 
   return (
     <>
-      {/*{isLoading && <p>isLoading</p>}*/}
-      {/*{!!authError && <p>{authError}</p>}*/}
       {isAlertMessage ? (
         <ModalWindow
           classNameFooterFlex={styles.footerFlex}
@@ -85,7 +83,11 @@ export const SignUp = () => {
           content={"Your message has been sent successfully"}
           onClose={onclickCloseModalWindow}
           otherFunction={
-            <Button className={styles.btnModalCloseWindow} callBack={onclickCloseModalWindow} title={"Close"} />
+            <Button
+              className={styles.btnModalCloseWindow}
+              callBack={onclickCloseModalWindow}
+              title={"Close"}
+            />
           }
         />
       ) : (

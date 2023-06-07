@@ -1,4 +1,29 @@
 
+.btnModalNavigateToLogin{
+  width: 150px;
+  height: 24px;
+  font-family: 'Montserrat',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  //line-height: 24px;
+  background: #366EFF;
+  border-radius: 2px;
+}
+
+.btnModalCloseWindow{
+  width: 52px;
+  height: 24px;
+  font-family: 'Montserrat',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  //line-height: 24px;
+  background: #366EFF;
+  border-radius: 2px;
+  margin-left: 140px;
+}
+
 .authContainer{
   height: 456px;
 

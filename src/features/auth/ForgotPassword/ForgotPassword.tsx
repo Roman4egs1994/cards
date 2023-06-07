@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AuthContainer } from "../AuthContainer/AuthContainer";
 import { Input } from "../../../components/Input/Input";
 import styles from "./styles.module.scss";
@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch } from "../../../app/hooks";
 import { authThunks } from "../auth.slice";
+import { ModalWindow } from "../../../components/ModalWindow/ModalWindow";
 
 const schema = yup.object().shape({
   email: yup.string().required("Email is a required").email("Email should have correct format"),
@@ -17,7 +18,7 @@ type FormDataType = yup.InferType<typeof schema>;
 
 export const ForgotPassword = () => {
   const dispatch = useAppDispatch();
-
+  const [isAlertMessage, setAlertMessage] = useState(false);
   const navigate = useNavigate();
 
   //Настройка React Hook Form
@@ -32,26 +33,51 @@ export const ForgotPassword = () => {
   });
 
   const onSubmit = (data: FormDataType) => {
-    const message = `<div style="background-color: lime; padding: 15px">
+    const message = `<div style="background-color: lime; padding: 30px">
                      password recovery link: 
-                     <a href="http://localhost:3000/#/set-new-password/$token$">
+                     <a href="http://localhost:3000/set-new-password/$token$"> 
                      link</a>
                      </div>`;
-
     const from = `test-front-admin<R.rybkin94@gmail.com>`;
 
-    const preparedData = { ...data, messages: message, from: from }; //Проверка на undefined
+    const preparedData = { ...data, messages: message, from: from }; //Докидываем параметры
 
-    dispatch(authThunks.forgotPassword(preparedData));
-    // .unwrap()
-    // .then(() => navigate("/check-email"))
-    // .catch((err) => console.warn(err));
-    // navigate("/set-new-password");
+    dispatch(authThunks.forgotPassword(preparedData))
+      .unwrap()
+      .then(() => setAlertMessage(true))
+      .catch((err) => console.warn(err));
     reset();
   };
 
   return (
     <>
+      {isAlertMessage ? (
+        <ModalWindow
+          classNameFooterFlex={styles.footerFlex}
+          title={"Message"}
+          footer={
+            <Button
+              className={styles.btnModalNavigateToLogin}
+              type={"button"}
+              title={"Send instructions"}
+              callBack={() => {
+                navigate("/check-email");
+              }}
+            />
+          }
+          content={"Your message has been sent successfully"}
+          onClose={() => setAlertMessage(false)}
+          otherFunction={
+            <Button
+              className={styles.btnModalCloseWindow}
+              callBack={() => setAlertMessage(false)}
+              title={"Close"}
+            />
+          }
+        />
+      ) : (
+        <></>
+      )}
       <AuthContainer
         textTitle={"Forgot your password"}
         classNameAuthContainer={styles.authContainer}

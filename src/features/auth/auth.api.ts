@@ -7,8 +7,11 @@ export const authApi = {
   login: (arg: LoginArgType) => {
     return instance.post<ProfileUserType>("auth/login", arg);
   },
-  forgot: (data: ForgotArgType) => {
-    return instance.post("/auth/forgot", data);
+  forgot: (arg: ForgotArgType) => {
+    return instance.post<ForgotPassResponse>("/auth/forgot", arg);
+  },
+  setNewPassword: (arg: SetNewPassType) => {
+    return instance.post("/auth/set-new-password");
   },
 };
 
@@ -16,11 +19,11 @@ export const authApi = {
 //Pick какие типы выбрать
 //Partial все типы будут не обяз
 
-//отправляем на восстановление пароля
-// export type ForgotArgType = Pick<LoginArgType, "email"> & {
-//   from?: string;
-//   message: string;
-// };
+//отправляем на создание нового пароля
+type SetNewPassType = {
+  password: string;
+  resetPasswordToken: string;
+};
 
 //отправляем на восстановление пароля
 export type ForgotArgType = Pick<LoginArgType, "email"> & {
@@ -60,4 +63,11 @@ export type ProfileUserType = {
   __v: number;
   token: string;
   tokenDeathTime: number;
+};
+
+export type ForgotPassResponse = {
+  info: string;
+  success: boolean;
+  answer: boolean;
+  html: boolean;
 };

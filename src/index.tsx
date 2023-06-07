@@ -5,7 +5,7 @@ import { store } from "./app/store";
 import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, useParams } from "react-router-dom";
 import { SignIn } from "./features/auth/SignIn/SignIn";
 import { SignUp } from "./features/auth/SignUp/SignUp";
 import { ForgotPassword } from "./features/auth/ForgotPassword/ForgotPassword";
@@ -13,9 +13,9 @@ import { CheckEmail } from "./features/auth/ForgotPassword/CheckEmail/CheckEmail
 import { Profile } from "./features/Profile/Profile";
 import { Cards } from "./features/Cards/Cards";
 import { CreateNewPassword } from "./features/auth/ForgotPassword/CreateNewPassword/CreateNewPassword";
-
 const container = document.getElementById("root")!;
 const root = createRoot(container);
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -46,10 +46,9 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/set-new-password",
+    path: "/set-new-password/:id",
     element: (
       <App>
-        {/*<CheckEmail />*/}
         <CreateNewPassword />
       </App>
     ),
@@ -59,7 +58,6 @@ export const router = createBrowserRouter([
     element: (
       <App>
         <CheckEmail />
-        {/*<CreateNewPassword />*/}
       </App>
     ),
   },

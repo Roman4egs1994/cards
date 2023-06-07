@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authApi, ForgotArgType, LoginArgType, ProfileUserType, RegisterArgType } from "./auth.api";
+import {
+  authApi,
+  ForgotArgType,
+  ForgotPassResponse,
+  LoginArgType,
+  ProfileUserType,
+  RegisterArgType,
+} from "./auth.api";
 import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk";
 import { thunkTryCatch } from "../../common/utils/thunk-try-catch";
 import { unhandledAction } from "../../common/actions";
@@ -9,7 +16,7 @@ const slice = createSlice({
   name: "auth",
   initialState: {
     profile: null as ProfileUserType | null,
-    redirect: () => {},
+    forgotPass: null as ForgotPassResponse | null,
     isLoading: false,
   },
   reducers: {
@@ -59,13 +66,13 @@ const login = createAppAsyncThunk<
   });
 });
 
-const forgotPassword = createAppAsyncThunk<any, ForgotArgType>(
+const forgotPassword = createAppAsyncThunk<ForgotPassResponse, ForgotArgType>(
   "auth/forgot",
   async (arg, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
       const res = await authApi.forgot(arg);
       console.log(res.data);
-      return res.data;
+      return { forgotPass: res.data };
     });
   }
 );
