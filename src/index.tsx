@@ -12,6 +12,7 @@ import { ForgotPassword } from "./features/auth/ForgotPassword/ForgotPassword";
 import { CheckEmail } from "./features/auth/ForgotPassword/CheckEmail/CheckEmail";
 import { Profile } from "./features/Profile/Profile";
 import { Cards } from "./features/Cards/Cards";
+import { CreateNewPassword } from "./features/auth/ForgotPassword/CreateNewPassword/CreateNewPassword";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -37,7 +38,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/forgot-password",
+    path: "/forgot",
     element: (
       <App>
         <ForgotPassword />
@@ -45,10 +46,20 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/forgot-password/check-email",
+    path: "/set-new-password",
+    element: (
+      <App>
+        {/*<CheckEmail />*/}
+        <CreateNewPassword />
+      </App>
+    ),
+  },
+  {
+    path: "/check-email",
     element: (
       <App>
         <CheckEmail />
+        {/*<CreateNewPassword />*/}
       </App>
     ),
   },

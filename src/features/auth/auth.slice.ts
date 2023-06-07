@@ -1,19 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  authApi,
-  LoginArgType,
-  ProfileUserType,
-  RegisterArgType,
-} from "./auth.api";
+import { authApi, ForgotArgType, LoginArgType, ProfileUserType, RegisterArgType } from "./auth.api";
 import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk";
 import { thunkTryCatch } from "../../common/utils/thunk-try-catch";
-import { appActions } from "../../app/app.slice";
+import { unhandledAction } from "../../common/actions";
 
 //REDUCER
 const slice = createSlice({
   name: "auth",
   initialState: {
     profile: null as ProfileUserType | null,
+    redirect: () => {},
     isLoading: false,
   },
   reducers: {
@@ -41,6 +37,8 @@ const registration = createAppAsyncThunk<any, RegisterArgType>(
     //   // console.error(e?.response?.data?.error);
     //   return rejectWithValue(e);
     // }
+
+    dispatch(unhandledAction);
     return thunkTryCatch(thunkAPI, async () => {
       const res = await authApi.register(arg);
       return res.data.addedUser;
@@ -61,6 +59,17 @@ const login = createAppAsyncThunk<
   });
 });
 
+const forgotPassword = createAppAsyncThunk<any, ForgotArgType>(
+  "auth/forgot",
+  async (arg, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+      const res = await authApi.forgot(arg);
+      console.log(res.data);
+      return res.data;
+    });
+  }
+);
+
 export const authReducer = slice.reducer;
 export const authActions = slice.actions;
-export const authThunks = { register: registration, login };
+export const authThunks = { register: registration, login, forgotPassword };

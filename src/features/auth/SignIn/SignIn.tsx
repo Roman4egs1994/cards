@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "../../../components/Button/Button";
 import { useAppDispatch } from "../../../app/hooks";
 import { authThunks } from "../auth.slice";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup.string().required("Email is a required").email("Email should have correct format"),
@@ -42,7 +42,7 @@ export const SignIn = () => {
     const preparedData = { ...data, rememberMe: !!data.rememberMe }; //Проверка на undefined
     dispatch(authThunks.login(preparedData))
       .unwrap()
-      .then()
+      .then(() => navigate("/cards"))
       .catch((err) => console.warn(err));
     reset();
   };
@@ -60,11 +60,16 @@ export const SignIn = () => {
             {errors.password && <p>{errors.password.message}</p>}
           </div>
           <div className={styles.inputCheckBoxBlock}>
-            <Input id={"rememberMe"} type={"checkbox"} {...register("rememberMe")} className={styles.inputCheckBox} />
+            <Input
+              id={"rememberMe"}
+              type={"checkbox"}
+              {...register("rememberMe")}
+              className={styles.inputCheckBox}
+            />
             <p className={styles.checkBoxText}>Remember me</p>
           </div>
           <div className={styles.forgotPasswordBlock}>
-            <a href="/forgot-password">Forgot Password</a>
+            <a href="/forgot">Forgot Password</a>
           </div>
           <div className={styles.bottomBlock}>
             <Button type={"submit"} title={"Sign in"} className={styles.btn} />

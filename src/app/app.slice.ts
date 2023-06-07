@@ -5,6 +5,7 @@ const appInitialState = {
   error: null as string | null,
   isLoading: false,
   isAppInitialized: false,
+  unhandledActions: [] as Array<any>,
 };
 
 // type AppInitialStateType = typeof appInitialState;
@@ -19,10 +20,7 @@ const slice = createSlice({
     setError: (state, action: PayloadAction<{ error: string | null }>) => {
       state.error = action.payload.error;
     },
-    setAppInitialized: (
-      state,
-      action: PayloadAction<{ isAppInitialized: boolean }>
-    ) => {
+    setAppInitialized: (state, action: PayloadAction<{ isAppInitialized: boolean }>) => {
       state.isAppInitialized = action.payload.isAppInitialized;
     },
   },
@@ -43,22 +41,22 @@ const slice = createSlice({
         state.isLoading = false;
 
         //Показ ошибки на rejected 1
-        const { error, showGlobalError = true } = action.payload;
+        let { error, showGlobalError = true } = action.payload;
 
-        if (!showGlobalError) return;
+        // if(!showGlobalError) return;
 
         let errorMessage = "";
         if (isAxiosError(error)) {
           if (
             error?.response?.status === 400 &&
-            error?.request.responseURL.endsWith("/me")
+            !showGlobalError
+            // error?.request.responseURL.endsWith("/me")
           )
             return;
           errorMessage = error?.response?.data?.error || error.message;
           state.error = errorMessage;
         } else if (error instanceof Error) {
           errorMessage = `Native error: ${error.message}`;
-
           state.error = errorMessage;
         } else {
           errorMessage = JSON.stringify(error);
@@ -74,6 +72,10 @@ const slice = createSlice({
         state.isLoading = false;
       }
     );
+    builder.addDefaultCase((state, action) => {
+      console.log("hello this is default case", action.type);
+      state.unhandledActions.push(action);
+    });
   },
   // extraReducers: (builder) => {
   //   builder.addCase(authThunks.register.rejected, (state, action) => {
