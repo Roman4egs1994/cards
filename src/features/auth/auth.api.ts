@@ -27,7 +27,7 @@ type SetNewPassType = {
 
 //отправляем на восстановление пароля
 export type ForgotArgType = Pick<LoginArgType, "email"> & {
-  messages: string;
+  message: string;
   from?: string;
 };
 

@@ -33,20 +33,21 @@ export const ForgotPassword = () => {
   });
 
   const onSubmit = (data: FormDataType) => {
-    const message = `<div style="background-color: lime; padding: 30px">
-                     password recovery link: 
-                     <a href="http://localhost:3000/set-new-password/$token$"> 
-                     link</a>
+    const message = `<div style="background-color: lime; padding: 10px">
+                     ссылка на восстановления пароля: 
+                     <a href="http:/localhost:3000/set-new-password/$token$"> 
+                     Скопировать ссылку на восстановления пароля</a>
                      </div>`;
     const from = `test-front-admin<R.rybkin94@gmail.com>`;
 
-    const preparedData = { ...data, messages: message, from: from }; //Докидываем параметры
+    const preparedData = { ...data, message, from: from }; //Докидываем параметры
 
     dispatch(authThunks.forgotPassword(preparedData))
       .unwrap()
       .then(() => setAlertMessage(true))
       .catch((err) => console.warn(err));
     reset();
+    console.log("message", message);
   };
 
   return (
