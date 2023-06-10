@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "./hooks";
 import { authThunks } from "../features/auth/auth.slice";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import { forgotStatus } from "../features/auth/localStorageStatus/localSrorageStatus";
 
 type AppTypeProps = {
   children?: ReactNode;
@@ -20,12 +21,19 @@ const App: FC<AppTypeProps> = ({ children }) => {
   const dispatch = useAppDispatch();
   const isAppInitialized = useAppSelector((state) => state.app.isAppInitialized);
 
+  console.log(forgotStatus);
+
   useEffect(() => {
     console.log("1");
-    dispatch(authThunks.authMe())
-      .unwrap()
-      .then(() => navigate("/cards"))
-      .catch(() => navigate("/login"));
+    if (forgotStatus === "sentForRestoration") {
+      return;
+    } else if (forgotStatus === "restored") {
+      console.log("2");
+      dispatch(authThunks.authMe())
+        .unwrap()
+        .then(() => navigate("/cards"))
+        .catch(() => navigate("/login"));
+    }
   }, [dispatch]);
 
   if (!isAppInitialized) {

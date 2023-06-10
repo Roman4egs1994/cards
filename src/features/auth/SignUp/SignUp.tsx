@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { authThunks } from "../auth.slice";
 import { ModalWindow } from "../../../components/ModalWindow/ModalWindow";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup.string().required("Email is a required").email("Email should have correct format"),
@@ -110,7 +110,8 @@ export const SignUp = () => {
           <div className={styles.bottomBlock}>
             <Button type={"submit"} title={"Sign Up"} className={styles.btn} />
             <p>Already have an account?</p>
-            <a href="/login">Sign In</a>
+            <Link to={"/login"}>Sign In</Link>
+            {/*<a href="/login">Sign In</a>*/}
           </div>
         </form>
       </AuthContainer>

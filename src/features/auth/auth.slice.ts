@@ -14,13 +14,16 @@ import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk";
 import { thunkTryCatch } from "../../common/utils/thunk-try-catch";
 import { unhandledAction } from "../../common/actions";
 
+export type ForgotDataStatus = "idle" | "sentForRestoration" | "restored";
 //REDUCER
 const slice = createSlice({
   name: "auth",
   initialState: {
     profile: null as ProfileUserType | null,
     forgotPass: null as ForgotPassResponse | null,
+    forgotStatus: "idle" as ForgotDataStatus,
     me: false,
+    logOut: null as string | null,
     // inLogin: false,
   },
   reducers: {
@@ -48,7 +51,16 @@ const slice = createSlice({
       })
       .addCase(authMeLogOut.fulfilled, (state, action) => {
         // state.inLogin = false;
-        state.me = false;
+        // state.me = false;
+        state.logOut = action.payload.info;
+      })
+      .addCase(forgotPassword.fulfilled, (state, action) => {
+        state.forgotStatus = "sentForRestoration";
+        localStorage.setItem("password recovery status", JSON.stringify(state.forgotStatus));
+      })
+      .addCase(setNewPassword.fulfilled, (state) => {
+        state.forgotStatus = "restored";
+        localStorage.setItem("password recovery status", JSON.stringify(state.forgotStatus));
       });
   },
 });
@@ -124,7 +136,9 @@ const authMeLogOut = createAppAsyncThunk<meResponseLogout, void>(
   "auth/meLogOut",
   async (_, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
-      return await authApi.meLogOut();
+      const res = await authApi.meLogOut();
+
+      return { logOut: res.data };
     });
   }
 );

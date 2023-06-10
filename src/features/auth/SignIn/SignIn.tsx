@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "../../../components/Button/Button";
 import { useAppDispatch } from "../../../app/hooks";
 import { authThunks } from "../auth.slice";
-import { redirect, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup.string().required("Email is a required").email("Email should have correct format"),
@@ -43,7 +43,7 @@ export const SignIn = () => {
     dispatch(authThunks.login(preparedData))
       .unwrap()
       .then(() => navigate("/cards"))
-      .catch((err) => console.warn(err));
+      .catch();
     reset();
   };
 
@@ -69,13 +69,12 @@ export const SignIn = () => {
             <p className={styles.checkBoxText}>Remember me</p>
           </div>
           <div className={styles.forgotPasswordBlock}>
-            <a href="/forgot">Forgot Password</a>
+            <Link to={"/forgot"}>Forgot Password</Link>
           </div>
           <div className={styles.bottomBlock}>
             <Button type={"submit"} title={"Sign in"} className={styles.btn} />
-            {/*<button type={"submit"}>asdasd</button>*/}
             <p>Don't have an account?</p>
-            <a href="/register">Sign Up</a>
+            <Link to={"/register"}>Sign Up</Link>
           </div>
         </form>
       </AuthContainer>

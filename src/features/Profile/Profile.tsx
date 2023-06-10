@@ -30,7 +30,7 @@ export const Profile = () => {
     dispatch(authThunks.authMeLogOut())
       .unwrap()
       .then(() => {
-        navigate("/");
+        navigate("/login");
       });
   };
 
