@@ -3,11 +3,19 @@ import styled from "./Header.module.scss";
 import styleStartContainer from "../../common/styles/Container.module.scss";
 import logo from "../../common/image/icon/logo.8a063c2a.svg";
 import { Button } from "../../components/Button/Button";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { authApi } from "../auth/auth.api";
+import { authThunks } from "../auth/auth.slice";
 
 export const Header = () => {
   const headerContainer = styleStartContainer.container + " " + styled.headerContainer;
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const inAuthMe = useAppSelector((state) => state.auth.me);
+  // const inLogin = useAppSelector((state) => state.auth.inLogin);
+  const profile = useAppSelector((state) => state.auth.profile);
 
   const onClickBtnSignIn = () => {
     navigate("/login");
@@ -17,15 +25,16 @@ export const Header = () => {
     <header className={styled.headerBlock}>
       <div className={headerContainer}>
         <img src={logo} alt="logo" />
-
-        {/*ЕСЛИ НЕ ЗАЛОГИНЕНЫ*/}
-        <Button callBack={onClickBtnSignIn} title={"Sign In"} className={styled.buttonSignIn} />
-
-        {/*ЕСЛИ МЫ ЗАЛОГИНЕНЫ*/}
-        {/*<div className={styled.loginTrue}>*/}
-        {/*    <p className={styled.nameLogin}>Roman</p>*/}
-        {/*    <img src="" alt=""/>*/}
-        {/*</div>*/}
+        {inAuthMe ? (
+          <Link to={"/profile"}>
+            <div className={styled.loginTrue}>
+              <p className={styled.nameLogin}>{profile?.name}</p>
+              <img src={profile?.avatar} alt="avatar" />
+            </div>
+          </Link>
+        ) : (
+          <Button callBack={onClickBtnSignIn} title={"Sign In"} className={styled.buttonSignIn} />
+        )}
       </div>
     </header>
   );

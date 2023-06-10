@@ -7,6 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useAppDispatch } from "../../../../app/hooks";
+import { authThunks } from "../../auth.slice";
 
 const schema = yup.object().shape({
   password: yup
@@ -22,10 +24,10 @@ const schema = yup.object().shape({
 type FormDataType = yup.InferType<typeof schema>;
 
 export const CreateNewPassword = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id: token } = useParams();
 
-  console.log(token);
   const {
     register,
     handleSubmit,
@@ -37,7 +39,12 @@ export const CreateNewPassword = () => {
   });
 
   const onSubmit = (data: FormDataType) => {
-    alert(JSON.stringify(data));
+    if (token !== undefined) {
+      const preparedData = { ...data, resetPasswordToken: token };
+      dispatch(authThunks.setNewPassword(preparedData))
+        .unwrap()
+        .then(() => navigate("/login"));
+    }
     reset();
   };
   return (

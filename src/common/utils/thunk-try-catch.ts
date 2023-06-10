@@ -1,7 +1,6 @@
 import { BaseThunkAPI } from "@reduxjs/toolkit/dist/createAsyncThunk";
 import { AppDispatch, RootState } from "../../app/store";
 import { appActions } from "../../app/app.slice";
-import { isAxiosError } from "axios";
 
 export const thunkTryCatch = async (
   thunkAPI: BaseThunkAPI<RootState, any, AppDispatch, unknown>,
@@ -12,7 +11,7 @@ export const thunkTryCatch = async (
   // dispatch(appActions.setIsLoading({ isLoading: true }));
   try {
     return await promise();
-  } catch (e: any) {
+  } catch (error: any) {
     //Показ ошибки функцией thunkTryCatch
     // let errorMessage = "";
     // if (isAxiosError(e)) {
@@ -26,8 +25,8 @@ export const thunkTryCatch = async (
     //   dispatch(appActions.setError({ error: errorMessage }));
     // }
 
-    return rejectWithValue({ error: e, showGlobalError });
+    return rejectWithValue({ error: error, showGlobalError });
   } finally {
-    // dispatch(appActions.setIsLoading({ isLoading: false }));
+    dispatch(appActions.setAppInitialized({ isAppInitialized: true }));
   }
 };

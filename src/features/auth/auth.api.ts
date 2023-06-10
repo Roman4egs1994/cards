@@ -11,7 +11,13 @@ export const authApi = {
     return instance.post<ForgotPassResponse>("/auth/forgot", arg);
   },
   setNewPassword: (arg: SetNewPassType) => {
-    return instance.post("/auth/set-new-password");
+    return instance.post<SetNewPassResponse>("/auth/set-new-password", arg);
+  },
+  me: () => {
+    return instance.post<ProfileUserType>("/auth/me");
+  },
+  meLogOut: () => {
+    return instance.delete<meResponseLogout>("/auth/me");
   },
 };
 
@@ -19,10 +25,34 @@ export const authApi = {
 //Pick какие типы выбрать
 //Partial все типы будут не обяз
 
+export type meResponseLogout = {
+  info: string;
+};
+
+export type meResponse = {
+  _id: string;
+  email: string;
+  rememberMe: boolean;
+  isAdmin: boolean;
+  name: string;
+  verified: boolean;
+  publicCardPacksCount: number;
+  created: string;
+  updated: string;
+  __v: number;
+  token: string;
+  tokenDeathTime: number;
+  avatar?: string;
+};
+
 //отправляем на создание нового пароля
-type SetNewPassType = {
+export type SetNewPassType = {
   password: string;
   resetPasswordToken: string;
+};
+
+export type SetNewPassResponse = {
+  info: string;
 };
 
 //отправляем на восстановление пароля
@@ -56,6 +86,7 @@ export type ProfileUserType = {
   rememberMe: boolean;
   isAdmin: boolean;
   name: string;
+  avatar?: string;
   verified: boolean;
   publicCardPacksCount: number;
   created: string;

@@ -1,63 +1,69 @@
-import React, {ChangeEvent, useState} from 'react';
-import styled from './Profile.module.scss'
-import arrow from '../../common/image/icon/Arrow.png'
-import styleStartContainer from "../../common/styles/Container.module.scss";
-import photoProfile from '../../common/image/photoProfile.jpg'
-import {TextField} from "@mui/material";
-import {EditableLogin} from "./EditableLogin/EditableLogin";
-import {elGR} from "@mui/material/locale";
-import {Button} from "../../components/Button/Button";
-
-type ProfileType = {
-    photo: string
-    login: string
-    mail: string
-}
-
+import React, { useState } from "react";
+import styled from "./Profile.module.scss";
+import arrow from "../../common/image/icon/Arrow.png";
+import photoProfile from "../../common/image/photoProfile.jpg";
+import { EditableLogin } from "./EditableLogin/EditableLogin";
+import { Button } from "../../components/Button/Button";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { authThunks } from "../auth/auth.slice";
+import { useNavigate } from "react-router-dom";
 
 export const Profile = () => {
+  const profile = useAppSelector((state) => state.auth.profile);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-    const [login, setLogin] = useState<ProfileType[]>([
-        {photo: photoProfile, login: "roman", mail:"romanmoisidi@gmail.com"}
-    ])
-
-    const onClickRefactoringLogin = (newLogin: string) => {
-        setLogin(login.map((el) => ({...el, login: newLogin})))
-    }
-
-    const onClickLogoutProfile = () => {
-
-    }
-
+  if (!profile) {
     return (
-        <>
-            <div className={styled.profileBlock}>
-                <div className={styled.toBack}>
-                    <img src={arrow} alt=""/>
-                    <p>Back to Packs List</p>
-                </div>
-                <div className={styled.flexProfile}>
-                    <div className={styled.cardProfile}>
-                        <p className={styled.textHeader}>Personal Information</p>
-                        {login.map((el,index) => {
-                            return (
-                                <>
-                                    <div key={index} className={styled.photoProfile}>
-                                        <img src={el.photo} alt=""/>
-                                    </div>
-                                    <div className={styled.nameLogin}>
-                                        <EditableLogin login={el.login} callBack={onClickRefactoringLogin}/>
-                                    </div>
-                                    <div className={styled.mail}>
-                                        <p>{el.mail}</p>
-                                    </div>
-                                </>
-                            )
-                        })}
-                         <Button className={styled.btnLogOut} callBack={onClickLogoutProfile} title={'Log out'}/>
-                    </div>
-                </div>
-            </div>
-        </>
+      <div>
+        <p>asdads</p>
+      </div>
     );
+  }
+  // const onClickRefactoringLogin = (newLogin: string) => {
+  //   setLogin(login.map((el) => ({ ...el, login: newLogin })));
+  // };
+  const onClickRefactoringName = () => {
+    console.log();
+  };
+  const onClickLogoutProfile = () => {
+    dispatch(authThunks.authMeLogOut())
+      .unwrap()
+      .then(() => {
+        navigate("/");
+      });
+  };
+
+  return (
+    <>
+      <div className={styled.profileBlock}>
+        <div className={styled.toBack}>
+          <img src={arrow} alt="" />
+          <p>Back to Packs List</p>
+        </div>
+        <div className={styled.flexProfile}>
+          <div className={styled.cardProfile}>
+            <p className={styled.textHeader}>Personal Information</p>
+
+            <>
+              <div className={styled.photoProfile}>
+                <img src={profile?.avatar} alt="" />
+              </div>
+              <div className={styled.nameLogin}>
+                <EditableLogin login={profile?.name} callBack={onClickRefactoringName} />
+              </div>
+              <div className={styled.mail}>
+                <p>{profile?.email}</p>
+              </div>
+            </>
+            <Button
+              className={styled.btnLogOut}
+              callBack={onClickLogoutProfile}
+              title={"Log out"}
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };

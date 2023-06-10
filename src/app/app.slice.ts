@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { isAxiosError } from "axios";
+import { authThunks } from "../features/auth/auth.slice";
 
 const appInitialState = {
   error: null as string | null,
@@ -25,6 +26,15 @@ const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(authThunks.authMe.fulfilled, (state, action) => {
+      state.isAppInitialized = true;
+    });
+    builder.addCase(authThunks.authMe.rejected, (state, action) => {
+      state.isAppInitialized = true;
+    });
+    builder.addCase(authThunks.authMe.pending, (state, action) => {
+      state.isAppInitialized = false;
+    });
     builder.addMatcher(
       (action) => {
         return action.type.endsWith("/pending");
@@ -40,15 +50,12 @@ const slice = createSlice({
       (state, action) => {
         state.isLoading = false;
 
-        //Показ ошибки на rejected 1
-        let { error, showGlobalError = true } = action.payload;
-
-        // if(!showGlobalError) return;
+        const { error, showGlobalError = false } = action.payload;
 
         let errorMessage = "";
         if (isAxiosError(error)) {
           if (
-            error?.response?.status === 400 &&
+            error?.response?.status === 401 &&
             !showGlobalError
             // error?.request.responseURL.endsWith("/me")
           )
@@ -80,7 +87,7 @@ const slice = createSlice({
   // extraReducers: (builder) => {
   //   builder.addCase(authThunks.register.rejected, (state, action) => {
   //     state.isLoading = true;
-  //     // state.appActions.setIsLoading = true
+  //     state.appActions.setIsLoading = true
   //     if (!isAxiosError(action.payload)) {
   //       state.isLoading = true;
   //       state.error = "an error has occurred";

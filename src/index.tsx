@@ -15,9 +15,6 @@ import { Cards } from "./features/Cards/Cards";
 import { CreateNewPassword } from "./features/auth/ForgotPassword/CreateNewPassword/CreateNewPassword";
 const container = document.getElementById("root")!;
 const root = createRoot(container);
-const url = window.location.href; // получаем текущий URL
-const newUrl = url.replace("#", ""); // удаляем символ # из URL
-console.log("newUrl", newUrl);
 
 export const router = createBrowserRouter([
   {
