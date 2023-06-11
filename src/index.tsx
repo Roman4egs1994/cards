@@ -13,6 +13,7 @@ import { CheckEmail } from "./features/auth/ForgotPassword/CheckEmail/CheckEmail
 import { Profile } from "./features/Profile/Profile";
 import { Cards } from "./features/Cards/Cards";
 import { CreateNewPassword } from "./features/auth/ForgotPassword/CreateNewPassword/CreateNewPassword";
+import { ProtectedRoute } from "./common/hoc";
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 
@@ -65,7 +66,9 @@ export const router = createBrowserRouter([
     path: "/profile",
     element: (
       <App>
-        <Profile />
+        <ProtectedRoute>
+          <Profile />
+        </ProtectedRoute>
       </App>
     ),
   },
@@ -73,7 +76,9 @@ export const router = createBrowserRouter([
     path: "/cards",
     element: (
       <App>
-        <Cards />
+        <ProtectedRoute>
+          <Cards />
+        </ProtectedRoute>
       </App>
     ),
   },

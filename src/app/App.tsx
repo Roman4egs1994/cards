@@ -7,7 +7,7 @@ import { ErrorComponent } from "../components/ErrorComponent/ErrorComponent";
 import { IsLoadingLinear } from "../components/IsLoadingLinear/IsLoadingLinear";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { authThunks } from "../features/auth/auth.slice";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { forgotStatus } from "../features/auth/localStorageStatus/localSrorageStatus";
 
@@ -21,19 +21,18 @@ const App: FC<AppTypeProps> = ({ children }) => {
   const dispatch = useAppDispatch();
   const isAppInitialized = useAppSelector((state) => state.app.isAppInitialized);
 
-  console.log(forgotStatus);
+  console.log("forgotStatus", forgotStatus);
 
   useEffect(() => {
-    console.log("1");
-    if (forgotStatus === "sentForRestoration") {
-      return;
-    } else if (forgotStatus === "restored") {
-      console.log("2");
-      dispatch(authThunks.authMe())
-        .unwrap()
-        .then(() => navigate("/cards"))
-        .catch(() => navigate("/login"));
-    }
+    // if (forgotStatus === "sentForRestoration") {
+    //   return;
+    // } else if (forgotStatus === "restored") {
+
+    dispatch(authThunks.authMe());
+    // .unwrap()
+    // .then(() => navigate("/cards"))
+    // .catch(() => navigate("/login"));
+    // }
   }, [dispatch]);
 
   if (!isAppInitialized) {

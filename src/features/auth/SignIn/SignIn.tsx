@@ -40,10 +40,11 @@ export const SignIn = () => {
 
   const onSubmit = (data: FormDataType) => {
     const preparedData = { ...data, rememberMe: !!data.rememberMe }; //Проверка на undefined
-    dispatch(authThunks.login(preparedData))
-      .unwrap()
-      .then(() => navigate("/cards"))
-      .catch();
+    dispatch(authThunks.login(preparedData));
+    //todo: UseEffect
+    // .unwrap()
+    // .then(() => navigate("/cards"))
+    // .catch((e) => console.error(e));
     reset();
   };
 

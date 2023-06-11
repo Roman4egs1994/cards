@@ -51,7 +51,7 @@ const slice = createSlice({
       })
       .addCase(authMeLogOut.fulfilled, (state, action) => {
         // state.inLogin = false;
-        // state.me = false;
+        state.me = false;
         state.logOut = action.payload.info;
       })
       .addCase(forgotPassword.fulfilled, (state, action) => {

@@ -58,8 +58,11 @@ const slice = createSlice({
             error?.response?.status === 401 &&
             !showGlobalError
             // error?.request.responseURL.endsWith("/me")
-          )
+          ) {
+            console.error(error);
             return;
+          }
+
           errorMessage = error?.response?.data?.error || error.message;
           state.error = errorMessage;
         } else if (error instanceof Error) {

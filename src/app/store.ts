@@ -8,7 +8,10 @@ export const store = configureStore({
     app: appReducer,
     auth: authReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localStorageMiddleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(localStorageMiddleware),
   preloadedState: JSON.parse(localStorage.getItem("reduxState") || "{}"),
 });
 
