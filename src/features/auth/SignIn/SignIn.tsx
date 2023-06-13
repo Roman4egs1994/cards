@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AuthContainer } from "../AuthContainer/AuthContainer";
 import { Input } from "../../../components/Input/Input";
 import styles from "./styles.module.scss";
@@ -38,13 +38,15 @@ export const SignIn = () => {
     mode: "onBlur",
   });
 
+  useEffect(() => {});
+
   const onSubmit = (data: FormDataType) => {
     const preparedData = { ...data, rememberMe: !!data.rememberMe }; //Проверка на undefined
-    dispatch(authThunks.login(preparedData));
-    //todo: UseEffect
-    // .unwrap()
-    // .then(() => navigate("/cards"))
-    // .catch((e) => console.error(e));
+    dispatch(authThunks.login(preparedData))
+      //todo: UseEffect
+      .unwrap()
+      .then(() => navigate("/cards"));
+    // .catch(() => navigate("/login"));
     reset();
   };
 

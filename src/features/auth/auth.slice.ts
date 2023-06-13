@@ -2,12 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   authApi,
   ForgotArgType,
-  ForgotPassResponse,
+  ForgotPassResponseType,
   LoginArgType,
-  meResponseLogout,
+  MeReqRefactorNameAndLoginType,
+  MeResponseEditProfileType,
+  meResponseLogoutType,
   ProfileUserType,
   RegisterArgType,
-  SetNewPassResponse,
+  SetNewPassResponseType,
   SetNewPassType,
 } from "./auth.api";
 import { createAppAsyncThunk } from "../../common/utils/createAppAsyncThunk";
@@ -20,11 +22,9 @@ const slice = createSlice({
   name: "auth",
   initialState: {
     profile: null as ProfileUserType | null,
-    forgotPass: null as ForgotPassResponse | null,
+    forgotPass: null as ForgotPassResponseType | null,
     forgotStatus: "idle" as ForgotDataStatus,
     me: false,
-    logOut: null as string | null,
-    // inLogin: false,
   },
   reducers: {
     // setProfile: (state, action: PayloadAction<{ profile: ProfileUserType }>) => {
@@ -36,24 +36,21 @@ const slice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.profile = action.payload.profile;
         state.me = true;
-        // state.inLogin = true;
       })
       .addCase(login.rejected, (state) => {
         state.me = false;
       })
       .addCase(authMe.fulfilled, (state, action) => {
         state.me = true;
-        // state.inLogin = true;
         state.profile = action.payload.profile;
       })
-      .addCase(authMe.rejected, (state, action) => {
-        state.me = false;
-      })
+      // .addCase(authMe.rejected, (state, action) => {
+      //   state.me = false;
+      // })
       .addCase(authMeLogOut.fulfilled, (state, action) => {
-        // state.inLogin = false;
         state.me = false;
-        state.logOut = action.payload.info;
       })
+      //ЗАПИСЬ СОСТОЯНИЯ В LOCALSTORAGE
       .addCase(forgotPassword.fulfilled, (state, action) => {
         state.forgotStatus = "sentForRestoration";
         localStorage.setItem("password recovery status", JSON.stringify(state.forgotStatus));
@@ -61,11 +58,18 @@ const slice = createSlice({
       .addCase(setNewPassword.fulfilled, (state) => {
         state.forgotStatus = "restored";
         localStorage.setItem("password recovery status", JSON.stringify(state.forgotStatus));
+      })
+      .addCase(authMeRefactoringLogin.fulfilled, (state, action) => {
+        if (state.profile) {
+          state.profile.name = action.payload.name;
+        }
       });
   },
 });
 
 //THUNK
+
+/**  РЕГИСТРАЦИЯ */
 const registration = createAppAsyncThunk<any, RegisterArgType>(
   "auth/register",
   async (arg, thunkAPI) => {
@@ -87,6 +91,7 @@ const registration = createAppAsyncThunk<any, RegisterArgType>(
   }
 );
 
+/**  ВХОД ПО ЛОГИНУ */
 const login = createAppAsyncThunk<
   { profile: ProfileUserType /*Что возвращает**/ },
   LoginArgType /*Что принимает**/
@@ -98,7 +103,8 @@ const login = createAppAsyncThunk<
   });
 });
 
-const forgotPassword = createAppAsyncThunk<ForgotPassResponse, ForgotArgType>(
+/**  ВОССТАНОВИТЬ ПАРОЛЬ */
+const forgotPassword = createAppAsyncThunk<ForgotPassResponseType, ForgotArgType>(
   "auth/forgot",
   async (arg, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
@@ -108,7 +114,8 @@ const forgotPassword = createAppAsyncThunk<ForgotPassResponse, ForgotArgType>(
   }
 );
 
-const setNewPassword = createAppAsyncThunk<SetNewPassResponse, SetNewPassType>(
+/**  СОЗДАТЬ НОВЫЙ ПАРОЛЬ */
+const setNewPassword = createAppAsyncThunk<SetNewPassResponseType, SetNewPassType>(
   "auth/setNewPassword",
   async (arg, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
@@ -118,6 +125,7 @@ const setNewPassword = createAppAsyncThunk<SetNewPassResponse, SetNewPassType>(
   }
 );
 
+/** ПРОВЕРКА НА АВТОРИЗАЦИЮ */
 const authMe = createAppAsyncThunk<{ profile: ProfileUserType /*Что возвращает**/ }, void>(
   "auth/me",
   async (_, thunkAPI) => {
@@ -132,13 +140,24 @@ const authMe = createAppAsyncThunk<{ profile: ProfileUserType /*Что возв�
   }
 );
 
-const authMeLogOut = createAppAsyncThunk<meResponseLogout, void>(
+/** ВЫХОД ИЗ ЛОГИНА */
+const authMeLogOut = createAppAsyncThunk<meResponseLogoutType, void>(
   "auth/meLogOut",
   async (_, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
       const res = await authApi.meLogOut();
-
       return { logOut: res.data };
+    });
+  }
+);
+
+/** ПОМЕНЯТЬ ЛОГИН*/
+const authMeRefactoringLogin = createAppAsyncThunk<{ name: string }, MeReqRefactorNameAndLoginType>(
+  "auth/meRefactorLogin",
+  async (arg, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+      const res = await authApi.meRefactoringNameAndAvatar(arg);
+      return { name: res.data.updatedUser.name };
     });
   }
 );
@@ -152,4 +171,5 @@ export const authThunks = {
   setNewPassword,
   authMe,
   authMeLogOut,
+  authMeRefactoringLogin,
 };

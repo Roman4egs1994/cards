@@ -23,15 +23,16 @@ export const Profile = () => {
   // const onClickRefactoringLogin = (newLogin: string) => {
   //   setLogin(login.map((el) => ({ ...el, login: newLogin })));
   // };
-  const onClickRefactoringName = () => {
-    console.log();
-  };
+
   const onClickLogoutProfile = () => {
     dispatch(authThunks.authMeLogOut())
       .unwrap()
       .then(() => {
         navigate("/login");
       });
+  };
+  const onClickRefactoringName = (newLogin: string) => {
+    dispatch(authThunks.authMeRefactoringLogin({ name: newLogin }));
   };
 
   return (
@@ -44,18 +45,16 @@ export const Profile = () => {
         <div className={styled.flexProfile}>
           <div className={styled.cardProfile}>
             <p className={styled.textHeader}>Personal Information</p>
+            <div className={styled.photoProfile}>
+              <img src={profile?.avatar} alt="" />
+            </div>
 
-            <>
-              <div className={styled.photoProfile}>
-                <img src={profile?.avatar} alt="" />
-              </div>
-              <div className={styled.nameLogin}>
-                <EditableLogin login={profile?.name} callBack={onClickRefactoringName} />
-              </div>
-              <div className={styled.mail}>
-                <p>{profile?.email}</p>
-              </div>
-            </>
+            <div className={styled.nameLogin}>
+              <EditableLogin login={profile?.name} callBack={onClickRefactoringName} />
+            </div>
+            <div className={styled.mail}>
+              <p>{profile?.email}</p>
+            </div>
             <Button
               className={styled.btnLogOut}
               callBack={onClickLogoutProfile}

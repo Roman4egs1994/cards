@@ -26,14 +26,17 @@ const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(authThunks.authMe.fulfilled, (state, action) => {
-      state.isAppInitialized = true;
-    });
-    builder.addCase(authThunks.authMe.rejected, (state, action) => {
-      state.isAppInitialized = true;
-    });
+    // builder.addCase(authThunks.authMe.fulfilled, (state, action) => {
+    //   state.isAppInitialized = true;
+    // });
+    // builder.addCase(authThunks.authMe.rejected, (state, action) => {
+    //   state.isAppInitialized = true;
+    // });
     builder.addCase(authThunks.authMe.pending, (state, action) => {
       state.isAppInitialized = false;
+    });
+    builder.addCase(authThunks.authMeRefactoringLogin.pending, (state, action) => {
+      state.isLoading = false;
     });
     builder.addMatcher(
       (action) => {

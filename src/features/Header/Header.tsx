@@ -14,7 +14,6 @@ export const Header = () => {
   const navigate = useNavigate();
 
   const inAuthMe = useAppSelector((state) => state.auth.me);
-  // const inLogin = useAppSelector((state) => state.auth.inLogin);
   const profile = useAppSelector((state) => state.auth.profile);
 
   const onClickBtnSignIn = () => {

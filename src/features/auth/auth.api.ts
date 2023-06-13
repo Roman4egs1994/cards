@@ -1,4 +1,5 @@
 import { instance } from "../../common/api/common.api";
+import { string } from "yup";
 
 export const authApi = {
   register: (arg: RegisterArgType) => {
@@ -8,16 +9,19 @@ export const authApi = {
     return instance.post<ProfileUserType>("auth/login", arg);
   },
   forgot: (arg: ForgotArgType) => {
-    return instance.post<ForgotPassResponse>("/auth/forgot", arg);
+    return instance.post<ForgotPassResponseType>("/auth/forgot", arg);
   },
   setNewPassword: (arg: SetNewPassType) => {
-    return instance.post<SetNewPassResponse>("/auth/set-new-password", arg);
+    return instance.post<SetNewPassResponseType>("/auth/set-new-password", arg);
   },
   me: () => {
     return instance.post<ProfileUserType>("/auth/me");
   },
   meLogOut: () => {
-    return instance.delete<meResponseLogout>("/auth/me");
+    return instance.delete<meResponseLogoutType>("/auth/me");
+  },
+  meRefactoringNameAndAvatar: (arg: MeReqRefactorNameAndLoginType) => {
+    return instance.put<MeResponseEditProfileType>("/auth/me", arg);
   },
 };
 
@@ -25,7 +29,33 @@ export const authApi = {
 //Pick какие типы выбрать
 //Partial все типы будут не обяз
 
-export type meResponseLogout = {
+export type MeReqRefactorNameAndLoginType = {
+  name?: string;
+  avatar?: string; //
+};
+
+export type MeResponseEditProfileType = {
+  updatedUser: MeResEditProfileTypeUpdatedUser;
+  token: string;
+  tokenDeathTime: number;
+};
+export type MeResEditProfileTypeUpdatedUser = {
+  _id: string;
+  email: string;
+  rememberMe: boolean;
+  isAdmin: boolean;
+  name: string;
+  avatar: string;
+  verified: boolean;
+  publicCardPacksCount: number;
+  created: string;
+  updated: string;
+  __v: number;
+  token: string;
+  tokenDeathTime: number;
+};
+
+export type meResponseLogoutType = {
   info: string;
 };
 
@@ -51,7 +81,7 @@ export type SetNewPassType = {
   resetPasswordToken: string;
 };
 
-export type SetNewPassResponse = {
+export type SetNewPassResponseType = {
   info: string;
 };
 
@@ -96,7 +126,7 @@ export type ProfileUserType = {
   tokenDeathTime: number;
 };
 
-export type ForgotPassResponse = {
+export type ForgotPassResponseType = {
   info: string;
   success: boolean;
   answer: boolean;

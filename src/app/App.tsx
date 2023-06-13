@@ -24,10 +24,6 @@ const App: FC<AppTypeProps> = ({ children }) => {
   console.log("forgotStatus", forgotStatus);
 
   useEffect(() => {
-    // if (forgotStatus === "sentForRestoration") {
-    //   return;
-    // } else if (forgotStatus === "restored") {
-
     dispatch(authThunks.authMe());
     // .unwrap()
     // .then(() => navigate("/cards"))
