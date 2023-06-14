@@ -28,7 +28,6 @@ const App: FC<AppTypeProps> = ({ children }) => {
     // .unwrap()
     // .then(() => navigate("/cards"))
     // .catch(() => navigate("/login"));
-    // }
   }, [dispatch]);
 
   if (!isAppInitialized) {

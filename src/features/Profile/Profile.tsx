@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "./Profile.module.scss";
 import arrow from "../../common/image/icon/Arrow.png";
-import photoProfile from "../../common/image/photoProfile.jpg";
 import { EditableLogin } from "./EditableLogin/EditableLogin";
 import { Button } from "../../components/Button/Button";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { authThunks } from "../auth/auth.slice";
 import { useNavigate } from "react-router-dom";
+import { ImageUpload } from "../../components/ImageUpload/ImageUpload";
 
 export const Profile = () => {
   const profile = useAppSelector((state) => state.auth.profile);
@@ -25,11 +25,12 @@ export const Profile = () => {
   // };
 
   const onClickLogoutProfile = () => {
-    dispatch(authThunks.authMeLogOut())
-      .unwrap()
-      .then(() => {
-        navigate("/login");
-      });
+    dispatch(authThunks.authMeLogOut());
+    //   .unwrap()
+    //   .then(() => {
+    //     navigate("/login");
+    //   })
+    //   .catch();
   };
   const onClickRefactoringName = (newLogin: string) => {
     dispatch(authThunks.authMeRefactoringLogin({ name: newLogin }));
@@ -46,11 +47,12 @@ export const Profile = () => {
           <div className={styled.cardProfile}>
             <p className={styled.textHeader}>Personal Information</p>
             <div className={styled.photoProfile}>
-              <img src={profile?.avatar} alt="" />
+              <ImageUpload />
+              <img className={styled.photo} src={profile?.avatar} alt="" />
             </div>
-
             <div className={styled.nameLogin}>
               <EditableLogin login={profile?.name} callBack={onClickRefactoringName} />
+              <div></div>
             </div>
             <div className={styled.mail}>
               <p>{profile?.email}</p>

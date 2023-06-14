@@ -5,7 +5,6 @@ import {
   ForgotPassResponseType,
   LoginArgType,
   MeReqRefactorNameAndLoginType,
-  MeResponseEditProfileType,
   meResponseLogoutType,
   ProfileUserType,
   RegisterArgType,

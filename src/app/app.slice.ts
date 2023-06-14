@@ -62,7 +62,6 @@ const slice = createSlice({
             !showGlobalError
             // error?.request.responseURL.endsWith("/me")
           ) {
-            console.error(error);
             return;
           }
 
@@ -85,10 +84,10 @@ const slice = createSlice({
         state.isLoading = false;
       }
     );
-    builder.addDefaultCase((state, action) => {
-      console.log("hello this is default case", action.type);
-      state.unhandledActions.push(action);
-    });
+    // builder.addDefaultCase((state, action) => {
+    //   console.log("hello this is default case", action.type);
+    //   state.unhandledActions.push(action);
+    // });
   },
   // extraReducers: (builder) => {
   //   builder.addCase(authThunks.register.rejected, (state, action) => {

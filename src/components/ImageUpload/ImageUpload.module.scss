@@ -1,0 +1,41 @@
+.blockPhoto{
+  position: absolute;
+  left: 158.99px;
+
+  .labelBlock{
+    position: absolute;
+    z-index: 1;
+    top: 60px;
+    left: 65px;
+    width: 38px;
+    height: 38px;
+    border-radius: 19px;
+    background-color: rgba(175, 175, 175, 0.73);
+    padding: 1px 1px 0 0;
+   transition: 500ms;
+
+    &:hover{
+      background-color: rgba(175, 175, 175, 0.86);
+    }
+    .label{
+      display: none;
+    }
+
+
+    .iconMi{
+      color: rgba(117, 117, 117, 0.65);
+      font-size: 1.70em;
+    }
+  }
+  .inputImage{
+    display: none;
+  }
+
+  .addPhoto{
+    position: relative;
+    width: 96px;
+    height: 96px;
+    border-radius: 48px;
+  }
+}
+
